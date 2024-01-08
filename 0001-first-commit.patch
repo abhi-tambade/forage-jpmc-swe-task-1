@@ -1,0 +1,54 @@
+From f8a5439fbfda5367402d3d444425c028dc9efe0c Mon Sep 17 00:00:00 2001
+From: Abhijit Tambade <abhijittambade03@gmail.com>
+Date: Sun, 7 Jan 2024 23:33:00 +0530
+Subject: [PATCH] first commit
+
+---
+ client3.py | 9 ++++++---
+ hello.py   | 1 +
+ 2 files changed, 7 insertions(+), 3 deletions(-)
+ create mode 100644 hello.py
+
+diff --git a/client3.py b/client3.py
+index 3fc09b7..fb2849a 100644
+--- a/client3.py
++++ b/client3.py
+@@ -35,14 +35,16 @@ def getDataPoint(quote):
+     stock = quote['stock']
+     bid_price = float(quote['top_bid']['price'])
+     ask_price = float(quote['top_ask']['price'])
+-    price = bid_price
++    price = (bid_price + ask_price)/2
+     return stock, bid_price, ask_price, price
+ 
+ 
+ def getRatio(price_a, price_b):
+     """ Get ratio of price_a and price_b """
+     """ ------------- Update this function ------------- """
+-    return 1
++    if (price_b == 0):
++        return
++    return (price_a/ price_b)
+ 
+ 
+ # Main
+@@ -54,6 +56,7 @@ if __name__ == "__main__":
+         """ ----------- Update to get the ratio --------------- """
+         for quote in quotes:
+             stock, bid_price, ask_price, price = getDataPoint(quote)
++            prices[stock] = price
+             print("Quoted %s at (bid:%s, ask:%s, price:%s)" % (stock, bid_price, ask_price, price))
+ 
+-        print("Ratio %s" % getRatio(price, price))
++        print("Ratio %s" % getRatio(prices["ABC"], prices["DEF"]))
+diff --git a/hello.py b/hello.py
+new file mode 100644
+index 0000000..e021a6f
+--- /dev/null
++++ b/hello.py
+@@ -0,0 +1 @@
++print("hello world.....");
+\ No newline at end of file
+-- 
+2.43.0.windows.1
+
